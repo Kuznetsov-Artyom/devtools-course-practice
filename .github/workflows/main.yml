@@ -2,7 +2,6 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
   pull_request:
 
 env:
@@ -19,7 +18,7 @@ jobs:
 
     steps:
     - name: Clone repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
@@ -59,7 +58,7 @@ jobs:
 
     steps:
     - name: Clone repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Run tests
       env:
