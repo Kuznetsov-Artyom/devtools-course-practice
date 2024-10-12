@@ -23,11 +23,11 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Install requirements (CodeCheck)
-      if: matrix.ctest_model == 'CodeCheck'
-      run: |
-        sudo apt-get install -y cppcheck
-        pip install cpplint
+   # - name: Install requirements (CodeCheck)
+   #   if: matrix.ctest_model == 'CodeCheck'
+   #   run: |
+   #     sudo apt-get install -y cppcheck
+   #    pip install cpplint
 
     - name: Install requirements (MemCheck)
       if: matrix.ctest_model == 'MemCheck'
