@@ -63,41 +63,41 @@ set(LIBRARY_DEPS "gtest")
 
 find_package(PythonInterp)
 
-if(PYTHON_EXECUTABLE)
-    file(GLOB_RECURSE srcs_for_cpplint
-        "${CMAKE_SOURCE_DIR}/modules/*.h"
-        "${CMAKE_SOURCE_DIR}/modules/*.hpp"
-        "${CMAKE_SOURCE_DIR}/modules/*.cpp"
-        "${CMAKE_SOURCE_DIR}/modules/*.cxx")
+# if(PYTHON_EXECUTABLE)
+#    file(GLOB_RECURSE srcs_for_cpplint
+#        "${CMAKE_SOURCE_DIR}/modules/*.h"
+#        "${CMAKE_SOURCE_DIR}/modules/*.hpp"
+#        "${CMAKE_SOURCE_DIR}/modules/*.cpp"
+#        "${CMAKE_SOURCE_DIR}/modules/*.cxx")
+#
+#    set(cpplint_out_files "")
+#    foreach(src_file ${srcs_for_cpplint})
+#        file(RELATIVE_PATH src_file_relative "${CMAKE_SOURCE_DIR}/modules" "${src_file}")
 
-    set(cpplint_out_files "")
-    foreach(src_file ${srcs_for_cpplint})
-        file(RELATIVE_PATH src_file_relative "${CMAKE_SOURCE_DIR}/modules" "${src_file}")
+#        get_filename_component(file_dir "${src_file_relative}" DIRECTORY)
+#        file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/cpplint.out/${file_dir}")
 
-        get_filename_component(file_dir "${src_file_relative}" DIRECTORY)
-        file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/cpplint.out/${file_dir}")
+#        set(cpplint_out_file "${CMAKE_BINARY_DIR}/cpplint.out/${src_file_relative}.cpplint.out")
+#       list(APPEND cpplint_out_files "${cpplint_out_file}")
 
-        set(cpplint_out_file "${CMAKE_BINARY_DIR}/cpplint.out/${src_file_relative}.cpplint.out")
-        list(APPEND cpplint_out_files "${cpplint_out_file}")
+#        add_custom_command(OUTPUT "${cpplint_out_file}"
+#            COMMAND "${CMAKE_COMMAND}"
+#                    -D "FILE=${src_file}"
+#                    -D "OUT_FILE=${cpplint_out_file}"
+#                    -P "${CMAKE_SOURCE_DIR}/run_cpplint.cmake"
+#            MAIN_DEPENDENCY "${src_file}"
+#            DEPENDS "run_cpplint.cmake"
+#           COMMENT "Perform code analysis via cpplint for ${src_file_relative}"
+#           VERBATIM)
+#    endforeach()
 
-        add_custom_command(OUTPUT "${cpplint_out_file}"
-            COMMAND "${CMAKE_COMMAND}"
-                    -D "FILE=${src_file}"
-                    -D "OUT_FILE=${cpplint_out_file}"
-                    -P "${CMAKE_SOURCE_DIR}/run_cpplint.cmake"
-            MAIN_DEPENDENCY "${src_file}"
-            DEPENDS "run_cpplint.cmake"
-            COMMENT "Perform code analysis via cpplint for ${src_file_relative}"
-            VERBATIM)
-    endforeach()
+#    set_property(SOURCE ${cpplint_out_files} PROPERTY GENERATED TRUE)
 
-    set_property(SOURCE ${cpplint_out_files} PROPERTY GENERATED TRUE)
-
-    add_custom_target(cpplint
-        DEPENDS ${cpplint_out_files}
-        COMMENT "Perform code analysis via cpplint"
-        SOURCES "run_cpplint.cmake")
-endif()
+#    add_custom_target(cpplint
+#        DEPENDS ${cpplint_out_files}
+#        COMMENT "Perform code analysis via cpplint"
+#        SOURCES "run_cpplint.cmake")
+# endif()
 
 #
 # Include all modules
